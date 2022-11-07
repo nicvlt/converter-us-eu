@@ -1,9 +1,11 @@
-import { Text } from 'react-native'
+import { View, Text, StyleSheet} from 'react-native'
 
 export default function TextResult({result, currency}){
     return(
-        <Text adjustsFontSizeToFit={true} numberOfLines={1} style={{fontWeight: 'bold', fontSize: 80, height:200, marginTop: '10%'}}>
-            {result}{currency}
-        </Text>
-    )
+        <View style={{height:200, width:'100%',display:'flex', justifyContent:'center',alignItems:'center'}}>
+            <Text adjustsFontSizeToFit={true} numberOfLines={1} style={{justifyContent:'center', alignItems:'center', fontWeight: 'bold', fontSize: 80}}>
+                {result}{currency}
+            </Text>
+        </View>
+    )     
 }

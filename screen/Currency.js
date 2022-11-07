@@ -1,10 +1,11 @@
-import { StyleSheet, Text, View} from 'react-native';
+import { StyleSheet, View} from 'react-native';
 import {useState, useEffect} from 'react'
 import FlatButton from '../components/button';
 import TextField from '../components/TextField';
 import CurrencyBox from '../components/currencyBox';
-import { colorTheme } from '../shared/theme';
+import { colorTheme, colorCardTheme } from '../shared/theme';
 import TextResult from '../components/TextResult';
+import Config from "react-native-config";
 
 
 export default function Currency() {
@@ -14,13 +15,12 @@ export default function Currency() {
   const [result, setResult] = useState(0)
   const [ratio, setRatio] = useState(1.0)
   const [alreadyFetched, setAlreadyFetched] = useState(false)
-  const ID_SEARCH_ENGINE = '45036a1acd19f4a11'
-  const ID_CUSTOM_SEARCH = 'AIzaSyDKp5yS9hoHGnltpuYukXahht6KUYSWXDA'
+
 
   useEffect(() => {
     if(!alreadyFetched)
     {
-      fetch(`https://www.googleapis.com/customsearch/v1?key=${ID_CUSTOM_SEARCH}&cx=${ID_SEARCH_ENGINE}&q=1+eur+to+usd`)
+      fetch(`https://www.googleapis.com/customsearch/v1?key=${'45036a1acd19f4a11'}&cx=${'AIzaSyDKp5yS9hoHGnltpuYukXahht6KUYSWXDA'}&q=1+eur+to+usd`)
       .then(res=>res.json())
       .then(res=> {
         var index = JSON.stringify(res).indexOf(`<b>1 USD</b>`)
@@ -42,11 +42,10 @@ export default function Currency() {
     <>
     <View style={{backgroundColor: colorTheme, zIndex:4}}>
       <View style={[styles.container, styles.shadow]}>
-        <View>
-        <TextResult result={fromCurrency=='USD' ? (result*ratio).toFixed(2) : (result/ratio).toFixed(2)} currency={fromCurrency == 'EUR'? '$':'€'}/>
-          
+        <View style={{borderRadius:20, width:'90%', marginBottom:50, marginTop:50}}>
+          <TextResult result={fromCurrency=='USD' ? (result*ratio).toFixed(2) : (result/ratio).toFixed(2)} currency={fromCurrency == 'EUR'? '$':'€'}/>
         </View>
-        <View style={styles.currencyLevel}>
+        <View style={[styles.currencyLevel]}>
           <View>
               <CurrencyBox  text={fromCurrency} focusState={false}/>
           </View>
@@ -70,7 +69,7 @@ export default function Currency() {
 const styles = StyleSheet.create({
   container: {
     height:'100%',
-    backgroundColor: 'white',
+    backgroundColor: colorCardTheme,
     alignItems: 'center',
     borderTopEndRadius:50, 
     borderTopStartRadius:50, 
@@ -78,9 +77,14 @@ const styles = StyleSheet.create({
     paddingTop:20,
   },
   currencyLevel: {
+    justifyContent:'center',
+    borderWidth:1.5,
+    borderRadius:20,
     alignItems:'center',
+    display:'flex',
     flexDirection:'row',
-    flexWrap:'wrap',
+    backgroundColor:'white',
+    elevation:5
   },
   shadow:{
     shadowColor: '#0d0d0c',
