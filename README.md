@@ -3,7 +3,7 @@
 Convert any __european__ units to __american__ units (and __vice versa__)
 
 ### Preview
-![Preview](https://imgur.com/a/jBtk2Jc)
+![Preview](https://media3.giphy.com/media/ITrvPxybgfcSUdhSa9/giphy.gif)
 
 ### Languages
 
