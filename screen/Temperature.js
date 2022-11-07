@@ -3,6 +3,8 @@ import { StyleSheet, Text, View} from 'react-native';
 import TextField from '../components/TextField';
 import CurrencyBox from '../components/currencyBox';
 import FlatButton from '../components/button';
+import { colorTheme } from '../shared/theme';
+import TextResult from '../components/TextResult';
 
 
 export default function Temperature(){
@@ -18,9 +20,10 @@ export default function Temperature(){
     }
 
     return(
-    <View style={styles.container}>
+    <View style={{backgroundColor: colorTheme}}>
+      <View style={styles.container}>
         <View>
-            <Text style={{fontWeight: 'bold', fontSize: 80, height:200, marginTop: '10%'}}>{fromTemperature=='F'? ((result-32)*0.5556).toFixed(2) : (result*1.8 + 32).toFixed(2)}{fromTemperature=='C'? '°F' : '°C'}</Text>
+            <TextResult result={fromTemperature=='F'? ((result-32)*0.5556).toFixed(2) : (result*1.8 + 32).toFixed(2)} currency={fromTemperature=='C'? '°F' : '°C'}/>
         </View>
         <View style={styles.weightLevel}>
             <View>
@@ -34,9 +37,11 @@ export default function Temperature(){
             </View>
         </View>
         <View>
-            <TextField setResult={setResult}/>
+            <TextField setResult={setResult} focusState={true}/>
         </View>
+     </View>
     </View>
+    
   );
 }
 
@@ -45,6 +50,11 @@ const styles = StyleSheet.create({
     height:'100%',
     backgroundColor: 'white',
     alignItems: 'center',
+    borderTopEndRadius:50, 
+    borderTopStartRadius:50, 
+    marginTop:10,
+    paddingTop:20,
+
   },
   weightLevel: {
     justifyContent:'center',

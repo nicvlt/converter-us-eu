@@ -3,6 +3,8 @@ import { StyleSheet, Text, View} from 'react-native';
 import TextField from '../components/TextField';
 import CurrencyBox from '../components/currencyBox';
 import FlatButton from '../components/button';
+import { colorTheme } from '../shared/theme';
+import TextResult from '../components/TextResult';
 
 
 export default function Distance(){
@@ -18,35 +20,40 @@ export default function Distance(){
     }
 
     return(
-    <View style={styles.container}>
-        <View>
-            <Text style={{fontWeight: 'bold', fontSize: 80, height:200, marginTop: '10%'}}>{fromDistance=='MI'? (result*1.609344).toFixed(2) : (result/1.609344).toFixed(2)}{fromDistance=='KM'? 'mi' : 'km'}</Text>
-        </View>
-        <View style={styles.weightLevel}>
+      <View style={{backgroundColor: colorTheme}}>
+        <View style={styles.container}>
             <View>
-                <CurrencyBox text={fromDistance}/>
+                <TextResult result={fromDistance=='MI'? (result*1.609344).toFixed(2) : (result/1.609344).toFixed(2)} currency={fromDistance=='KM'? 'mi' : 'km'}/>
+            </View>
+            <View style={styles.weightLevel}>
+                <View>
+                    <CurrencyBox text={fromDistance}/>
+                </View>
+                <View>
+                <FlatButton text='SWAP' onPress={swapDistance}/>
+                </View>
+                <View>
+                    <CurrencyBox text={toDistance}/>
+                </View>
             </View>
             <View>
-            <FlatButton text='SWAP' onPress={swapDistance}/>
-            </View>
-            <View>
-                <CurrencyBox text={toDistance}/>
+                <TextField setResult={setResult} focusState={true}/>
             </View>
         </View>
-        <View>
-            <TextField setResult={setResult}/>
-        </View>
-    </View>
+      </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     height:'100%',
-
     backgroundColor: 'white',
-
     alignItems: 'center',
+    borderTopEndRadius:50, 
+    borderTopStartRadius:50, 
+    marginTop:10,
+    paddingTop:20,
+
   },
   weightLevel: {
     justifyContent:'center',

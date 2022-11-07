@@ -1,9 +1,10 @@
 import {React, useState} from 'react';
-import { StyleSheet, Text, View} from 'react-native';
+import { StyleSheet, Text, View, TextInput} from 'react-native';
 import TextField from '../components/TextField';
 import CurrencyBox from '../components/currencyBox';
 import FlatButton from '../components/button';
-
+import { colorTheme } from '../shared/theme';
+import TextResult from '../components/TextResult';
 
 export default function Weight(){
 
@@ -11,16 +12,17 @@ export default function Weight(){
     const [toWeight, setToWeight] = useState('KG')
     const [result, setResult] = useState(0)
 
-    const swapWeight = () => {
+    const swapWeight = () => {  
         const tempWeight = fromWeight;
         setFromWeight(toWeight);
         setToWeight(tempWeight);
     }
 
     return(
-    <View style={styles.container}>
+    <View style={{backgroundColor: colorTheme}}>
+      <View style={styles.container}>
         <View>
-            <Text style={{fontWeight: 'bold', fontSize: 80, height:200, marginTop: '10%'}}>{fromWeight=='LB'? (result/2.20462).toFixed(2) : (result*2.20462).toFixed(2)}{fromWeight=='KG'? 'lb' : 'kg'}</Text>
+            <TextResult result={fromWeight=='LB'? (result/2.20462).toFixed(2) : (result*2.20462).toFixed(2)} currency={fromWeight=='KG'? 'lb' : 'kg'}/>
         </View>
         <View style={styles.weightLevel}>
             <View>
@@ -34,23 +36,28 @@ export default function Weight(){
             </View>
         </View>
         <View>
-            <TextField setResult={setResult}/>
+            <TextField setResult={setResult} focusState={true}/>
         </View>
-    </View>
+     </View>
+    </View>  
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     height:'100%',
-
     backgroundColor: 'white',
     alignItems: 'center',
+    borderTopEndRadius:50, 
+    borderTopStartRadius:50, 
+    marginTop:10,
+    paddingTop:20,
   },
   weightLevel: {
     justifyContent:'center',
     alignItems:'center',
     flexDirection:'row',
     flexWrap:'wrap',
-  }
+  },
+  
 });
