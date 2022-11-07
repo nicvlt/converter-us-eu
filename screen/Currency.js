@@ -1,4 +1,4 @@
-import { StyleSheet, View} from 'react-native';
+import { StyleSheet, View, ScrollView, ToastAndroid} from 'react-native';
 import {useState, useEffect} from 'react'
 import FlatButton from '../components/button';
 import TextField from '../components/TextField';
@@ -9,6 +9,17 @@ import TextResult from '../components/TextResult';
 
 export default function Currency() {
   
+  const toastShowTimeout = () => {
+    setTimeout(() => {
+      ToastAndroid.show("We couldn't connect to the internet", ToastAndroid.SHORT, ToastAndroid.BOTTOM)
+    }, 3000)
+  }
+
+  const toastShow = () => {
+    toastShowTimeout()
+    clearTimeout(toastShowTimeout)
+  }
+
   const [fromCurrency, setFromCurrency] = useState('USD')
   const [toCurrency, setToCurrency] = useState('EUR')
   const [result, setResult] = useState(0)
@@ -26,7 +37,8 @@ export default function Currency() {
         index=='-1' ?  setRatio(1) : setRatio(JSON.stringify(res).substring(index+14, index+21))
       })
       setAlreadyFetched(true)
-      {ratio==1 ? console.log("It didn't fetch") : console.log('It did fetch')}
+      {ratio==1 ? toastShow()
+      : console.log('It did fetch')}
     }
 
   })
@@ -38,7 +50,8 @@ export default function Currency() {
   }
 
   return (
-    <>
+    <ScrollView contentContainerStyle={{flexGrow: 1}}
+    keyboardShouldPersistTaps='handled'>
     <View style={{backgroundColor: colorTheme, zIndex:4}}>
       <View style={[styles.container, styles.shadow]}>
         <View style={{width:'90%', marginBottom:50, marginTop:50}}>
@@ -60,7 +73,7 @@ export default function Currency() {
         </View>
       </View>
     </View>
-    </>
+    </ScrollView>
     
   );
 }

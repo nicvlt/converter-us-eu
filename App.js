@@ -15,7 +15,7 @@ import AppLoader from './components/AppLoader';
 const CustomDrawer = (props) => {
   return <DrawerContentScrollView {...props}>
     <View style={{marginBottom:'75%'}}></View>
-    <DrawerItemList drawerI {...props}/>
+    <DrawerItemList {...props}/>
   </DrawerContentScrollView>
 }
 

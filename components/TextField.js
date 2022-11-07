@@ -23,6 +23,7 @@ export default function TextField({ setResult, autoFocus}){
                     borderWidth: isFocused ? 2: 0,
                 }]}
                 onFocus={handleOnFocus} onBlur={handleOnBlur} onChangeText = {(value) => setResult(value)}
+                
                 blurOnSubmit={true} clearTextOnFocus={true} caretHidden={true} maxLength={10} keyboardType = 'numeric' autoFocus = {autoFocus} placeholder='Enter a value'
             />
         </View>

@@ -1,5 +1,5 @@
 import {React, useState} from 'react';
-import { StyleSheet, Text, View, TextInput} from 'react-native';
+import { StyleSheet, ScrollView, View} from 'react-native';
 import TextField from '../components/TextField';
 import CurrencyBox from '../components/currencyBox';
 import FlatButton from '../components/button';
@@ -19,27 +19,30 @@ export default function Weight(){
     }
 
     return(
-    <View style={{backgroundColor: colorTheme, zIndex:4}}>
-      <View style={[styles.container, styles.shadow]}>
-        <View style={{width:'90%', marginBottom:50, marginTop:50}}>
-            <TextResult result={fromWeight=='LB'? (result/2.20462).toFixed(2) : (result*2.20462).toFixed(2)} currency={fromWeight=='KG'? 'lb' : 'kg'}/>
-        </View>
-        <View style={styles.weightLevel}>
-            <View>
-                <CurrencyBox text={fromWeight}/>
+      <ScrollView contentContainerStyle={{flexGrow: 1}}
+        keyboardShouldPersistTaps='handled'>
+        <View style={{backgroundColor: colorTheme, zIndex:4}}>
+          <View style={[styles.container, styles.shadow]}>
+            <View style={{width:'90%', marginBottom:50, marginTop:50}}>
+                <TextResult result={fromWeight=='LB'? (result/2.20462).toFixed(2) : (result*2.20462).toFixed(2)} currency={fromWeight=='KG'? 'lb' : 'kg'}/>
+            </View>
+            <View style={styles.weightLevel}>
+                <View>
+                    <CurrencyBox text={fromWeight}/>
+                </View>
+                <View>
+                <FlatButton text='SWAP' onPress={swapWeight}/>
+                </View>
+                <View>
+                    <CurrencyBox text={toWeight}/>
+                </View>
             </View>
             <View>
-            <FlatButton text='SWAP' onPress={swapWeight}/>
+                <TextField setResult={setResult} focusState={true}/>
             </View>
-            <View>
-                <CurrencyBox text={toWeight}/>
-            </View>
+          </View>
         </View>
-        <View>
-            <TextField setResult={setResult} focusState={true}/>
-        </View>
-     </View>
-    </View>  
+      </ScrollView>
   );
 }
 
