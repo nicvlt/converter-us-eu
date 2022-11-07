@@ -15,14 +15,14 @@ import AppLoader from './components/AppLoader';
 const CustomDrawer = (props) => {
   return <DrawerContentScrollView {...props}>
     <View style={{marginBottom:'75%'}}></View>
-    <DrawerItemList {...props}/>
+    <DrawerItemList drawerI {...props}/>
   </DrawerContentScrollView>
 }
 
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigator = () => {
-    return <Drawer.Navigator drawerContent={(props) => <CustomDrawer {...props} />}>
+    return <Drawer.Navigator nav drawerContent={(props) => <CustomDrawer {...props} />}>
               <Drawer.Screen component = {Currency} name ='CURRENCY' options={{headerStyle: { backgroundColor: colorTheme, elevation:0}, headerTintColor: '#fff', drawerActiveBackgroundColor:colorLightTheme}} />
               <Drawer.Screen component = {Weight} name ='WEIGHT' options={{headerStyle: { backgroundColor: colorTheme, elevation:0}, headerTintColor: '#fff', drawerActiveBackgroundColor:colorLightTheme}}/>
               <Drawer.Screen component = {Length} name ='LENGTH' options={{headerStyle: { backgroundColor: colorTheme, elevation:0}, headerTintColor: '#fff', drawerActiveBackgroundColor:colorLightTheme}}/>

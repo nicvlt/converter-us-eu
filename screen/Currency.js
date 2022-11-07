@@ -5,7 +5,6 @@ import TextField from '../components/TextField';
 import CurrencyBox from '../components/currencyBox';
 import { colorTheme, colorCardTheme } from '../shared/theme';
 import TextResult from '../components/TextResult';
-import Config from "react-native-config";
 
 
 export default function Currency() {
@@ -42,7 +41,7 @@ export default function Currency() {
     <>
     <View style={{backgroundColor: colorTheme, zIndex:4}}>
       <View style={[styles.container, styles.shadow]}>
-        <View style={{borderRadius:20, width:'90%', marginBottom:50, marginTop:50}}>
+        <View style={{width:'90%', marginBottom:50, marginTop:50}}>
           <TextResult result={fromCurrency=='USD' ? (result*ratio).toFixed(2) : (result/ratio).toFixed(2)} currency={fromCurrency == 'EUR'? '$':'€'}/>
         </View>
         <View style={[styles.currencyLevel]}>
@@ -78,8 +77,7 @@ const styles = StyleSheet.create({
   },
   currencyLevel: {
     justifyContent:'center',
-    borderWidth:1.5,
-    borderRadius:20,
+    borderRadius:10,
     alignItems:'center',
     display:'flex',
     flexDirection:'row',

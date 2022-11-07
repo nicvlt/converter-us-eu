@@ -16,11 +16,11 @@ export default function TextField({ setResult, autoFocus}){
     }
 
     return(
-        <View style = {styles.shadow}>
+        <View>
             <TextInput
                 style={[styles.textField, {
                     borderColor: isFocused ? colorTheme : 'black',
-                    borderWidth: isFocused ? 2: 1.5,
+                    borderWidth: isFocused ? 2: 0,
                 }]}
                 onFocus={handleOnFocus} onBlur={handleOnBlur} onChangeText = {(value) => setResult(value)}
                 blurOnSubmit={true} clearTextOnFocus={true} caretHidden={true} maxLength={10} keyboardType = 'numeric' autoFocus = {autoFocus} placeholder='Enter a value'
@@ -31,7 +31,10 @@ export default function TextField({ setResult, autoFocus}){
 
 const styles = StyleSheet.create({
     textField: {
+        justifyContent:'center',
+        alignContent:'center',
         paddingVertical: 5,
+        padding:20,
         borderRadius: 8,
         margin: 30,
         paddingHorizontal: 40,
@@ -39,8 +42,4 @@ const styles = StyleSheet.create({
         backgroundColor:'white',
         elevation:5,
     },
-    shadow:{
-        shadowColor: 'black',
-        elevation: 5,
-    }
 })
